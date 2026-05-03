@@ -25,14 +25,14 @@ int CPU_Run(Cpu *cpu) {
         // Fetch execute cycle
         uint8_t instructions[2];
         CPU_Fetch(cpu, instructions);
-
-        TEST_PrintState(cpu, 1);
         CPU_Exec(cpu, instructions, &running);
+        if (!running) break;
+        TEST_PrintState(cpu, 1, 1);
 
         // Sleep for half a sec
-        // usleep(1);
+        usleep(500000);
     }
-    TEST_PrintRam(cpu);
+    TEST_PrintRam(cpu, 0);
 
     return 0;
 
@@ -136,13 +136,13 @@ void CPU_Exec(Cpu *cpu, uint8_t instructions[2], int *running) {
                         cpu->R[N3] = 0x00;
                         break;
                     }
-                    cpu->R[N3]++;
+                    cpu->R[N3]++;   
                     break;
-
 
                 case 0x2:   // DEC
                     cpu->FL &= ~(FL_NEGATIVE | FL_ZERO);
                     if(cpu->R[N3] == 0x00) {
+                        printf("DEC UNDERFLOW\n");
                         cpu->FL |= FL_NEGATIVE;
                         cpu->R[N3] = 0xFF;
                         break;
@@ -151,6 +151,7 @@ void CPU_Exec(Cpu *cpu, uint8_t instructions[2], int *running) {
                     if (cpu->R[N3] == 0x0) cpu->FL |= FL_ZERO;
                     break;
             }
+            break;
 
         case  0x9:  // JUMP
             switch (N2) {
@@ -174,6 +175,7 @@ void CPU_Exec(Cpu *cpu, uint8_t instructions[2], int *running) {
                     if (cpu->FL & FL_CARRY == FL_CARRY) cpu->PC = cpu->R[N3];
                     break;
             }
+            break;
 
         case 0xA:   // CALL
             cpu->RAM[cpu->SP] = cpu->PC;
@@ -206,6 +208,7 @@ void CPU_Exec(Cpu *cpu, uint8_t instructions[2], int *running) {
                     cpu->R[N3] = (uint8_t)getchar();
                     break;
             }
+            break;
 
         case 0XF:
             break;

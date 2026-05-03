@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     //     return 1;
     // } 
 
-    TEST_HardcodeTest2(&cpu);
+    TEST_HardcodeTest3(&cpu);
     CPU_Run(&cpu);
 
     return 0;
