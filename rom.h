@@ -26,5 +26,4 @@ int ROM_LoadProgram(Cpu *cpu, const char *RomName) {
     return 0;
 }
 
-
 #endif

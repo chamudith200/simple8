@@ -21,7 +21,6 @@ enum{
 
 enum{
     STACK_START = 0xFF,
-    STACK_END = 0xF0
 };
 
 // Initialize the CPU
@@ -31,8 +30,10 @@ void CPU_Init(Cpu *cpu);
 int CPU_Run(Cpu *cpu);
 
 // Fetch an instruction from thr ram into the CPU
-uint8_t *CPU_Fetch(Cpu *cpu);
+uint8_t *CPU_Fetch(Cpu *cpu, uint8_t instructions[2]);
 
+// decode and execute
+void CPU_Exec(Cpu *cpu, uint8_t instructions[2], int *running);
 
 
 #endif
