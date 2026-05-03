@@ -20,11 +20,11 @@ gcc -o simple8 main.c cpu.c
 ## Run
 
 ```bash
-simple8.exe program.rom
+./simple8.exe program.rom
 ```
 
 The ROM is a flat binary file loaded into memory starting at `0x00`.
-Maximum program size is 240 bytes (120 instructions).
+Maximum program size is 256 bytes (128 instructions). The stack grows down from `0x00`. The program snd the stack can overwrite others. 
 
 ---
 
