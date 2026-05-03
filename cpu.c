@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#define TENTH_A_SEC 100000
 
 // Intialize the cpu
 void CPU_Init(Cpu *cpu) {
@@ -30,7 +31,7 @@ int CPU_Run(Cpu *cpu) {
         TEST_PrintState(cpu, 1, 1);
 
         // Sleep for half a sec
-        usleep(500000);
+        usleep(TENTH_A_SEC * 1);
     }
     TEST_PrintRam(cpu, 0);
 
@@ -202,6 +203,7 @@ void CPU_Exec(Cpu *cpu, uint8_t instructions[2], int *running) {
             switch (N2) {
                 case 0x0:   // write to terminal
                     putchar(cpu->R[N3]);
+                    printf(" : 0x%02X\n", cpu->R[N3]);
                     break;
 
                 case 0x1:   // Read from the terminal

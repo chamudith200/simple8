@@ -16,8 +16,8 @@ int ROM_LoadProgram(Cpu *cpu, const char *RomName) {
     long romLength = ftell(file);
     fseek(file, 0, SEEK_SET);
 
-    if (romLength > 240) {
-        printf("Program is too long (max size = 240 Bytes)\n");
+    if (romLength > 256) {
+        printf("Program is too long (max size = 256 Bytes)\n");
         return 2;
     }
 

@@ -9,11 +9,11 @@ int main(int argc, char **argv) {
     Cpu cpu;
 
     CPU_Init(&cpu);
-    // if (ROM_LoadProgram(&cpu, "rom1.rom") != 0) {
-    //     return 1;
-    // } 
+    if (ROM_LoadProgram(&cpu, "rom1.rom") != 0) {
+        return 1;
+    } 
 
-    TEST_HardcodeTest3(&cpu);
+    // TEST_HardcodeTest3(&cpu);
     CPU_Run(&cpu);
 
     return 0;
