@@ -1,4 +1,5 @@
-# Custom CPU Architecture Spec — v1
+# SIMPLE 8
+## Custom CPU Architecture Spec — v1
 
 A minimal byte-wide CPU architecture designed for simplicity.  
 Input is a flat binary ROM. Output is terminal via dedicated I/O instructions.  
